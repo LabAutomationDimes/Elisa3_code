@@ -9,6 +9,7 @@ classdef VideoServer < handle
         trajK1;
         rawK1;
         orientation;
+        rectCrop; % limits of the rgb image to be considered. See parameters.m
         
         nAgents;
         curFrame;
@@ -56,6 +57,7 @@ classdef VideoServer < handle
             obj.enable_preview=enable_preview;
             obj.curFrame=[];
             obj.orientation=[];
+            obj.rectCrop=rectCrop;
             
             obj.timerCam=timer('ExecutionMode','fixedRate','Period',samplingTime);
             obj.timerCam.TimerFcn =@(myTimerObj, thisEvent)(updateAgents(obj));

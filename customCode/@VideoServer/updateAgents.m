@@ -1,7 +1,7 @@
 function[imgRGB]=updateAgents(videoServer)
 parameters;
-
 imgRGB = snapshot(videoServer.RGBcam);
+imgRGB = imcrop(imgRGB,videoServer.rectCrop);
 
 %imgIR  = snapshot(videoServer.IRcam);
 
@@ -22,6 +22,7 @@ imgRGB = snapshot(videoServer.RGBcam);
 % % % % % %         videoServer.orientation = currOrientation;
 % % % % % %     end
 
+% orientation via RGB
 [BW1,auxRGB1]=VideoServer.imgThresholdErode(imgRGB,ErosionThr,0);
 r=15;
 holes=zeros(videoServer.nAgents,3);

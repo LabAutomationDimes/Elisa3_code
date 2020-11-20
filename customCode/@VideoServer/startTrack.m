@@ -12,12 +12,23 @@ end
 pause(0.5);
 
 h=figure(1);
+
+% simple test to know the time taken by the snapshot command 
+% images=cell(1,100);
+% timesElapsed = zeros(1,100);
+% for i=1:100
+%     tic
+%     images(i) = {snapshot(videoServer.RGBcam)};
+%     timesElapsed(i) = toc;
+% end
+
 for i=1:videoServer.nAgents
     
-    elisas(i).setColor([1 1 1]);
+    elisas(i).setColor([0.1 0 0]);
     pause(1);
-    
-    imgRGB=snapshot(videoServer.RGBcam);
+    imgRGB = snapshot(videoServer.RGBcam); % time taken less than 4 ms
+    imgRGB = imcrop(imgRGB,videoServer.rectCrop);
+
     figure(h);imshow(imgRGB);
     title(['Robot: ' num2str(i) ' - Port: ' elisas(i).port]);
     
@@ -27,10 +38,10 @@ for i=1:videoServer.nAgents
     elisas(i).setColor([0 0 0]);
 end
 
-for i=1:videoServer.nAgents
-    elisas(i).setColor([1 1 1]);
-%     elisa(i).turnOnIR(Elisa3.turnOnIRoptions_All);
-end
+% for i=1:videoServer.nAgents
+%     elisas(i).setColor([1 1 1]);
+% %     elisa(i).turnOnIR(Elisa3.turnOnIRoptions_All);
+% end
 close(h);
 pause(0.5);
 
